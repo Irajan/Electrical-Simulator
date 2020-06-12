@@ -8,6 +8,8 @@
 void calculate(int, int, int);
 void delayPrompt(char[],unsigned);
 
+
+//Make the circuitComponents Blue Print
 class circuitComponents
 {
   protected:
@@ -23,8 +25,8 @@ class circuitComponents
 	  finalX = x2;
 	  finalY = y2;
 
-	pieslice(finalX,finalY,0,360,2);
-	pieslice(initialX,initialY,0,360,2);
+	pieslice(finalX,finalY,0,360,2);  	//Circle filled with color
+	pieslice(initialX,initialY,0,360,2);	//Circle filled with color
        }
 
 };
@@ -40,7 +42,7 @@ class Resistor:public circuitComponents
     }
     void draw()
       {
-	int x1,y1,x2,y2;
+	int x1,y1,x2,y2;  //Initial and final co-ordinats
 
 	x1 = (initialX*2 + finalX)/3;
 	y1 = (initialY*2 + finalY)/3;
@@ -81,7 +83,7 @@ class VoltageSource : public circuitComponents
     public:
     int* setValue()
     {
-	int *ampFrequency;
+	int *ampFrequency;  //array to store amplitude and frequencies
 	delayPrompt("\nEnter voltage Source",30);
 	delayPrompt("\nEnter the amplitude of source",30);
 	cin>>amplitude;
@@ -94,6 +96,8 @@ class VoltageSource : public circuitComponents
     void draw()
     {
 	int x1,y1,x2,y2;
+	
+	//Section Formula to divide line 3:2 ratio
 	x1 = (initialX*3 + finalX*2)/5;
 	y1 = (initialY*3 + finalY*2)/5;
 	x2 = (initialX*2 + finalX*3)/5;
@@ -137,6 +141,7 @@ class Capicator : public circuitComponents
     {
 	int x1,y1,x2,y2;
 
+	//Section Formula to divide line in 4:3 ratio
 	x1 = (initialX*4 + finalX*3)/7;
 	y1 = (initialY*4 + finalY*3)/7;
 	x2 = (initialX*3 + finalX*4)/7;
@@ -172,7 +177,7 @@ class Wire : public circuitComponents
 	   cin>>internalResistance;
 	   return internalResistance;
 	}
-	Wire()
+	Wire()  // Initilize internal Resistance on constructor to prevent exception if not set
 	{
 	 internalResistance = 0.005;
 	}
@@ -258,8 +263,8 @@ void main()
 	 cout<<"5. Exit"<<endl;
 
 	 choice = getch();
-	 clrscr();
-	 cleardevice();
+	 clrscr();	//reset cursor
+	 cleardevice();	//clear screen
 
 	switch (choice)
 	{
@@ -350,7 +355,7 @@ void main()
    while(choice != '5');
 }
 
-
+//Delay certain mili seconds while typing message
 void delayPrompt(char prompt[],unsigned time )
 {
    int i = 0;
@@ -376,9 +381,9 @@ void calculate(int R,int L,int C)
    clrscr();
    cleardevice();
 
-   printf("R = %d%c\n",R,234);
-   printf("L = %dmH\n",L);
-   printf("C = %d%cF\n",C,230);
+   printf("R = %d%c\n",R,234);		//234 = ASCII value for Ohm sign	
+   printf("L = %dmH\n",L);		
+   printf("C = %d%cF\n",C,230);		//230 = ASCII value for mili sign
    float Zc = 0;
    if (C != 0)
      Zc = 1000000.0/(2*3.14*af[1]*C);
@@ -426,6 +431,8 @@ void calculate(int R,int L,int C)
   }
   line(380,300,620,300);
 
+//Standard style convention message as lower right corner
+	
   setcolor(BLUE);
   outtextxy(380,getmaxy()-70,"Convention :");
   setcolor(3);
